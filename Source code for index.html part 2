@@ -1,0 +1,705 @@
+<section id="destinations" class="section-padding">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="section-label">Explore</span>
+                <h2>Popular destinations</h2>
+            </div>
+
+            <p>
+                Find inspiration for your next adventure and save the places
+                you want to visit.
+            </p>
+
+        </div>
+
+        <div class="destination-toolbar">
+
+            <div class="search-field">
+
+                <i class="bi bi-search"></i>
+
+                <input
+                    type="text"
+                    id="destinationSearch"
+                    placeholder="Search destinations..."
+                >
+
+            </div>
+
+            <select
+                id="categoryFilter"
+                class="form-select category-select"
+            >
+                <option value="all">All categories</option>
+                <option value="mountains">Mountains</option>
+                <option value="beach">Beach</option>
+                <option value="heritage">Heritage</option>
+                <option value="nature">Nature</option>
+            </select>
+
+            <button
+                class="btn btn-outline-custom"
+                id="favoritesOnly"
+            >
+                <i class="bi bi-heart"></i>
+                Favorites
+            </button>
+
+        </div>
+
+        <div id="destinationGrid" class="row g-4"></div>
+
+        <div id="emptyState" class="empty-state d-none">
+
+            <i class="bi bi-map"></i>
+
+            <h4>No destinations found</h4>
+
+            <p>
+                Try a different search term or category.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="planner" class="section-padding planner-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="section-label">Plan</span>
+                <h2>Create your trip</h2>
+            </div>
+
+            <p>
+                Start with your destination, dates and travel preferences.
+            </p>
+
+        </div>
+
+        <div class="planner-card">
+
+            <form id="tripForm">
+
+                <div class="row g-4">
+
+                    <div class="col-lg-6">
+
+                        <label
+                            for="tripDestination"
+                            class="form-label"
+                        >
+                            Destination
+                        </label>
+
+                        <div class="input-with-icon">
+
+                            <i class="bi bi-geo-alt"></i>
+
+                            <input
+                                type="text"
+                                id="tripDestination"
+                                class="form-control"
+                                placeholder="e.g. Manali"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-lg-3">
+
+                        <label
+                            for="startDate"
+                            class="form-label"
+                        >
+                            Start date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="startDate"
+                            class="form-control"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="col-lg-3">
+
+                        <label
+                            for="endDate"
+                            class="form-label"
+                        >
+                            End date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="endDate"
+                            class="form-control"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="col-lg-4">
+
+                        <label
+                            for="travelers"
+                            class="form-label"
+                        >
+                            Travelers
+                        </label>
+
+                        <select
+                            id="travelers"
+                            class="form-select"
+                        >
+
+                            <option value="1">
+                                1 Traveler
+                            </option>
+
+                            <option
+                                value="2"
+                                selected
+                            >
+                                2 Travelers
+                            </option>
+
+                            <option value="3">
+                                3 Travelers
+                            </option>
+
+                            <option value="4">
+                                4 Travelers
+                            </option>
+
+                            <option value="5">
+                                5 Travelers
+                            </option>
+
+                            <option value="6">
+                                6 Travelers
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-lg-4">
+
+                        <label
+                            for="travelStyle"
+                            class="form-label"
+                        >
+                            Travel style
+                        </label>
+
+                        <select
+                            id="travelStyle"
+                            class="form-select"
+                        >
+
+                            <option value="budget">
+                                Budget
+                            </option>
+
+                            <option
+                                value="standard"
+                                selected
+                            >
+                                Standard
+                            </option>
+
+                            <option value="premium">
+                                Premium
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-lg-4 d-flex align-items-end">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary-custom w-100 py-3"
+                        >
+                            <i class="bi bi-magic me-2"></i>
+                            Create itinerary
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+
+            <div
+                id="tripResult"
+                class="trip-result d-none"
+            ></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="budget" class="section-padding">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-label">
+                    Estimate
+                </span>
+
+                <h2>
+                    Trip budget calculator
+                </h2>
+
+            </div>
+
+            <p>
+                Get a quick estimate before you finalize
+                your travel plans.
+            </p>
+
+        </div>
+
+
+        <div class="budget-layout">
+
+
+            <div class="budget-form-card">
+
+                <div class="row g-4">
+
+
+                    <div class="col-md-6">
+
+                        <label
+                            for="transportCost"
+                            class="form-label"
+                        >
+                            Transportation
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                ₹
+                            </span>
+
+                            <input
+                                type="number"
+                                id="transportCost"
+                                class="form-control budget-input"
+                                value="5000"
+                                min="0"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label
+                            for="stayCost"
+                            class="form-label"
+                        >
+                            Accommodation
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                ₹
+                            </span>
+
+                            <input
+                                type="number"
+                                id="stayCost"
+                                class="form-control budget-input"
+                                value="6000"
+                                min="0"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label
+                            for="foodCost"
+                            class="form-label"
+                        >
+                            Food
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                ₹
+                            </span>
+
+                            <input
+                                type="number"
+                                id="foodCost"
+                                class="form-control budget-input"
+                                value="3500"
+                                min="0"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label
+                            for="activityCost"
+                            class="form-label"
+                        >
+                            Activities
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                ₹
+                            </span>
+
+                            <input
+                                type="number"
+                                id="activityCost"
+                                class="form-control budget-input"
+                                value="2500"
+                                min="0"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="budget-summary">
+
+                <span class="section-label">
+                    Estimated total
+                </span>
+
+                <div class="total-amount">
+
+                    ₹<span id="totalBudget">
+                        17000
+                    </span>
+
+                </div>
+
+
+                <div class="budget-line">
+
+                    <span>
+                        Transportation
+                    </span>
+
+                    <strong id="transportSummary">
+                        ₹5,000
+                    </strong>
+
+                </div>
+
+
+                <div class="budget-line">
+
+                    <span>
+                        Accommodation
+                    </span>
+
+                    <strong id="staySummary">
+                        ₹6,000
+                    </strong>
+
+                </div>
+
+
+                <div class="budget-line">
+
+                    <span>
+                        Food
+                    </span>
+
+                    <strong id="foodSummary">
+                        ₹3,500
+                    </strong>
+
+                </div>
+
+
+                <div class="budget-line">
+
+                    <span>
+                        Activities
+                    </span>
+
+                    <strong id="activitySummary">
+                        ₹2,500
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="about" class="section-padding about-section">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+
+            <div class="col-lg-6">
+
+                <span class="section-label">
+                    About the project
+                </span>
+
+                <h2>
+                    Everything you need to start planning.
+                </h2>
+
+                <p class="about-text">
+                    Smart Travel Planner is designed to bring
+                    destination discovery, trip planning and
+                    budget estimation together in one clean
+                    interface.
+                </p>
+
+
+                <div class="feature-list">
+
+
+                    <div>
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        <span>
+                            Responsive and mobile-friendly design
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        <span>
+                            Interactive JavaScript components
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        <span>
+                            API-ready architecture
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        <span>
+                            Ready for backend and database integration
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <div class="about-visual">
+
+
+                    <div class="floating-card card-one">
+
+                        <i class="bi bi-cloud-sun"></i>
+
+                        <span>
+                            Weather
+                        </span>
+
+                        <strong>
+                            24°C
+                        </strong>
+
+                    </div>
+
+
+                    <div class="floating-card card-two">
+
+                        <i class="bi bi-wallet2"></i>
+
+                        <span>
+                            Trip budget
+                        </span>
+
+                        <strong>
+                            ₹17,000
+                        </strong>
+
+                    </div>
+
+
+                    <div class="visual-center">
+
+                        <i class="bi bi-compass"></i>
+
+                        <span>
+                            Explore
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+
+            <a
+                class="navbar-brand d-flex align-items-center gap-2"
+                href="#home"
+            >
+
+                <span class="brand-icon">
+
+                    <i class="bi bi-compass"></i>
+
+                </span>
+
+                <span>
+                    Smart<span>Travel</span>
+                </span>
+
+            </a>
+
+
+            <p>
+                Plan your journey. Discover your destination.
+            </p>
+
+
+            <span>
+                ©
+                <span id="currentYear"></span>
+                Smart Travel Planner
+            </span>
+
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+    <div
+        id="appToast"
+        class="toast"
+        role="alert"
+    >
+
+        <div
+            class="toast-body d-flex align-items-center gap-2"
+        >
+
+            <i class="bi bi-check-circle-fill"></i>
+
+            <span id="toastMessage">
+                Saved successfully.
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="app.js"></script>
+
+</body>
+</html>
