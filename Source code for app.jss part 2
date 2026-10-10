@@ -1,0 +1,168 @@
+function formatCurrency(amount) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0
+  }).format(amount);
+}
+
+function calculateBudget() {
+  const transportation =
+    Number(document.getElementById("transportation").value) || 0;
+
+  const accommodation =
+    Number(document.getElementById("accommodation").value) || 0;
+
+  const food =
+    Number(document.getElementById("food").value) || 0;
+
+  const activities =
+    Number(document.getElementById("activities").value) || 0;
+
+  const total = transportation + accommodation + food + activities;
+
+  document.getElementById("transportationTotal").textContent =
+    formatCurrency(transportation);
+
+  document.getElementById("accommodationTotal").textContent =
+    formatCurrency(accommodation);
+
+  document.getElementById("foodTotal").textContent =
+    formatCurrency(food);
+
+  document.getElementById("activitiesTotal").textContent =
+    formatCurrency(activities);
+
+  document.getElementById("budgetTotal").textContent =
+    formatCurrency(total);
+}
+
+function getDateDifference(startDate, endDate) {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  const difference = end.getTime() - start.getTime();
+  const days = Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+  return days;
+}
+
+function createItinerary() {
+  const destination =
+    document.getElementById("plannerDestination").value;
+
+  const startDate =
+    document.getElementById("startDate").value;
+
+  const endDate =
+    document.getElementById("endDate").value;
+
+  const travelers =
+    Number(document.getElementById("travelers").value);
+
+  const travelStyle =
+    document.getElementById("travelStyle").value;
+
+  const itineraryResult =
+    document.getElementById("itineraryResult");
+
+  if (!destination || !startDate || !endDate || !travelers) {
+    showToast("Please complete all trip details.");
+    return;
+  }
+
+  const days = getDateDifference(startDate, endDate);
+
+  if (days <= 0) {
+    showToast("End date must be after the start date.");
+    return;
+  }
+
+  const activities = {
+    relaxed: [
+      "Explore local attractions",
+      "Enjoy a peaceful local experience",
+      "Try local food",
+      "Spend time exploring nearby places",
+      "Relax and enjoy the destination"
+    ],
+    balanced: [
+      "Visit popular attractions",
+      "Explore local markets",
+      "Try local cuisine",
+      "Visit cultural landmarks",
+      "Enjoy an evening activity"
+    ],
+    adventure: [
+      "Start the day with an adventure activity",
+      "Explore nearby scenic locations",
+      "Try a local outdoor experience",
+      "Visit an interesting attraction",
+      "Enjoy an adventurous evening"
+    ]
+  };
+
+  const selectedActivities =
+    activities[travelStyle] || activities.balanced;
+
+  const itineraryDays = [];
+
+  for (let i = 0; i < days && i < 5; i++) {
+    itineraryDays.push(`
+      <div class="itinerary-day">
+        <div class="itinerary-number">
+          ${i + 1}
+        </div>
+
+        <div>
+          <h5>Day ${i + 1}</h5>
+          <p>${selectedActivities[i]}</p>
+        </div>
+      </div>
+    `);
+  }
+
+  itineraryResult.innerHTML = `
+    <div class="itinerary-header">
+      <div>
+        <span class="section-label">Your Trip</span>
+        <h4>${destination}</h4>
+      </div>
+
+      <span class="traveler-count">
+        <i class="bi bi-people"></i>
+        ${travelers} traveler${travelers > 1 ? "s" : ""}
+      </span>
+    </div>
+
+    <div class="trip-summary">
+      <div>
+        <i class="bi bi-calendar3"></i>
+        <span>${days} day${days > 1 ? "s" : ""}</span>
+      </div>
+
+      <div>
+        <i class="bi bi-compass"></i>
+        <span>${travelStyle}</span>
+      </div>
+    </div>
+
+    <div class="itinerary-list">
+      ${itineraryDays.join("")}
+    </div>
+  `;
+
+  itineraryResult.classList.add("show");
+  showToast("Your itinerary has been created.");
+}
+
+document
+  .getElementById("budgetForm")
+  .addEventListener("input", calculateBudget);
+
+document
+  .getElementById("tripPlannerForm")
+  .addEventListener("submit", (event) => {
+    event.preventDefault();
+    createItinerary();
+  });
