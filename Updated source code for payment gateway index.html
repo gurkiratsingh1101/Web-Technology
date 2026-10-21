@@ -1,0 +1,455 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Travel Planner</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home">
+        <i class="bi bi-compass"></i> Smart<span>Travel</span>
+      </a>
+
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Toggle navigation">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li><a class="nav-link" href="#destinations">Destinations</a></li>
+          <li><a class="nav-link" href="#hotels">Hotels</a></li>
+          <li><a class="nav-link" href="#planner">Create Plan</a></li>
+          <li><a class="nav-link" href="#budget">Budget</a></li>
+          <li><a class="nav-link" href="#payment">Payment</a></li>
+          <li><a class="btn btn-primary ms-lg-2" href="#planner">Plan My Trip</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero section -->
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <div class="hero-copy">
+          <span class="eyebrow"><i class="bi bi-stars"></i> Your trip, planned simply</span>
+          <h1>Plan less.<br><span>Travel more.</span></h1>
+          <p>Discover beautiful places, choose a stay, build your travel plan and estimate your budget from one colourful travel dashboard.</p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="#planner">Create Your Travel Plan <i class="bi bi-arrow-right"></i></a>
+            <a class="btn btn-cream btn-lg" href="#destinations">Explore Destinations</a>
+          </div>
+
+          <div class="hero-search">
+            <i class="bi bi-search"></i>
+            <input id="heroSearch" placeholder="Search Manali, Chandigarh, Amritsar or Jaipur">
+            <button id="heroSearchButton" class="btn btn-primary">Search</button>
+          </div>
+
+          <div class="hero-stats">
+            <div><strong>9+</strong><span>Destinations</span></div>
+            <div><strong>18+</strong><span>Stay options</span></div>
+            <div><strong>4</strong><span>Travel styles</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Travel categories -->
+    <section class="mood-strip">
+      <div class="container">
+        <div class="mood-card mood-green">
+          <i class="bi bi-signpost-2"></i>
+          <div><strong>Weekend escapes</strong><span>Quick city and hill trips</span></div>
+        </div>
+        <div class="mood-card mood-orange">
+          <i class="bi bi-sun"></i>
+          <div><strong>Beach breaks</strong><span>Slow days and sunsets</span></div>
+        </div>
+        <div class="mood-card mood-blue">
+          <i class="bi bi-buildings"></i>
+          <div><strong>Culture trails</strong><span>Heritage, food and landmarks</span></div>
+        </div>
+        <div class="mood-card mood-purple">
+          <i class="bi bi-heart"></i>
+          <div><strong>Peaceful stays</strong><span>Nature and relaxed travel</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Destination cards are rendered by app.js -->
+    <section class="section destinations-section" id="destinations">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow dark">Explore</span>
+            <h2>Find your next destination</h2>
+            <p>Choose a place that matches the kind of trip you want.</p>
+          </div>
+          <button id="favoritesButton" class="btn btn-outline-primary">
+            <i class="bi bi-heart"></i> Favorites
+          </button>
+        </div>
+
+        <div class="filter-bar">
+          <div class="search-field">
+            <i class="bi bi-search"></i>
+            <input id="destinationSearch" placeholder="Search destination or location">
+          </div>
+          <select id="categoryFilter" class="form-select">
+            <option value="all">All categories</option>
+            <option value="mountains">Mountains</option>
+            <option value="beaches">Beaches</option>
+            <option value="culture">Culture</option>
+            <option value="nature">Nature</option>
+            <option value="adventure">Adventure</option>
+            <option value="city">City breaks</option>
+          </select>
+        </div>
+
+        <div id="destinationGrid" class="row g-4"></div>
+      </div>
+    </section>
+
+    <!-- Hotel cards are rendered by app.js -->
+    <section class="section hotels-section" id="hotels">
+      <div class="container">
+        <div class="section-heading light-heading">
+          <div>
+            <span class="eyebrow">Stay</span>
+            <h2>Hotels &amp; accommodation</h2>
+            <p>Sample stay options for your selected destination in this frontend version.</p>
+          </div>
+
+          <select id="hotelDestination" class="form-select compact">
+            <option>Manali</option>
+            <option>Goa</option>
+            <option>Amritsar</option>
+            <option>Jaipur</option>
+            <option>Kerala</option>
+            <option>Ladakh</option>
+            <option>Chandigarh</option>
+            <option>Shimla</option>
+            <option>Delhi</option>
+          </select>
+        </div>
+
+        <div id="hotelGrid" class="row g-4"></div>
+      </div>
+    </section>
+
+    <!-- Three-step travel planner -->
+    <section class="section planner-section" id="planner">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow dark">Plan</span>
+            <h2>Create your travel plan</h2>
+            <p>Choose destination, dates, travel style and accommodation, then generate your plan.</p>
+          </div>
+        </div>
+
+        <div class="planner-layout">
+          <div class="planner-card">
+            <div class="steps">
+              <span class="active">1</span><i></i><span>2</span><i></i><span>3</span>
+            </div>
+
+            <form id="travelPlanForm">
+              <div class="pstep active-step">
+                <small>STEP 1</small>
+                <h3>Where are you going?</h3>
+
+                <div class="row g-3">
+                  <div class="col-md-7">
+                    <label for="plannerDestination">Destination</label>
+                    <select id="plannerDestination" class="form-select">
+                      <option>Manali</option><option>Goa</option><option>Amritsar</option>
+                      <option>Jaipur</option><option>Kerala</option><option>Ladakh</option>
+                      <option>Chandigarh</option><option>Shimla</option><option>Delhi</option>
+                    </select>
+                  </div>
+                  <div class="col-md-5">
+                    <label for="travelers">Travelers</label>
+                    <input id="travelers" class="form-control" type="number" min="1" value="2">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="startDate">Start date</label>
+                    <input id="startDate" class="form-control" type="date" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="endDate">End date</label>
+                    <input id="endDate" class="form-control" type="date" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pstep">
+                <small>STEP 2</small>
+                <h3>Choose your travel style</h3>
+                <div class="styles">
+                  <label class="style selected">
+                    <input type="radio" name="style" value="balanced" checked>
+                    <i class="bi bi-compass"></i><strong>Balanced</strong>
+                    <span>Sightseeing + relaxation</span>
+                  </label>
+                  <label class="style">
+                    <input type="radio" name="style" value="relaxed">
+                    <i class="bi bi-cup-hot"></i><strong>Relaxed</strong>
+                    <span>Slow and peaceful</span>
+                  </label>
+                  <label class="style">
+                    <input type="radio" name="style" value="adventure">
+                    <i class="bi bi-signpost-split"></i><strong>Adventure</strong>
+                    <span>Outdoor experiences</span>
+                  </label>
+                  <label class="style">
+                    <input type="radio" name="style" value="luxury">
+                    <i class="bi bi-gem"></i><strong>Luxury</strong>
+                    <span>Comfort and premium stays</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="pstep">
+                <small>STEP 3</small>
+                <h3>Select accommodation</h3>
+                <div id="plannerHotels"></div>
+              </div>
+
+              <div class="planner-actions">
+                <button type="button" id="prevStep" class="btn btn-light">Back</button>
+                <button type="button" id="nextStep" class="btn btn-primary">Next <i class="bi bi-arrow-right"></i></button>
+                <button type="submit" id="generatePlan" class="btn btn-primary d-none">Create My Travel Plan <i class="bi bi-magic"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <div class="preview">
+            <span class="eyebrow dark">Your plan</span>
+            <h3>Trip summary</h3>
+            <div id="planSummary" class="empty">
+              <i class="bi bi-map"></i>
+              <p>Your travel plan will appear here after you complete the steps.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Payment demo: card or QR-only UPI -->
+    <section class="section payment-section" id="payment">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow dark">Secure checkout demo</span>
+            <h2>Complete your booking</h2>
+            <p>Review your trip and choose card payment or scan the UPI QR code.</p>
+          </div>
+        </div>
+
+        <div class="payment-layout">
+          <div class="payment-card">
+            <div class="payment-tabs" role="group" aria-label="Payment method">
+              <button type="button" class="payment-tab active" data-method="card">
+                <i class="bi bi-credit-card"></i> Card
+              </button>
+              <button type="button" class="payment-tab" data-method="upi">
+                <i class="bi bi-qr-code"></i> UPI QR
+              </button>
+            </div>
+
+            <div id="cardPayment" class="payment-method">
+              <h3>Card details</h3>
+              <p class="payment-note">Demo only — do not enter real card details.</p>
+
+              <form id="cardPaymentForm">
+                <label for="cardName">Cardholder name</label>
+                <input id="cardName" class="form-control" autocomplete="cc-name" placeholder="Name on card" required>
+
+                <label for="cardNumber">Card number</label>
+                <input id="cardNumber" class="form-control" inputmode="numeric" maxlength="19" placeholder="1234 5678 9012 3456" required>
+
+                <div class="row g-3">
+                  <div class="col-6">
+                    <label for="cardExpiry">Expiry date</label>
+                    <input id="cardExpiry" class="form-control" placeholder="MM/YY" maxlength="5" required>
+                  </div>
+                  <div class="col-6">
+                    <label for="cardCvv">CVV</label>
+                    <input id="cardCvv" class="form-control" inputmode="numeric" maxlength="4" placeholder="•••" required>
+                  </div>
+                </div>
+
+                <button class="btn btn-primary w-100 mt-4" type="submit">
+                  Pay demo amount <i class="bi bi-lock"></i>
+                </button>
+              </form>
+            </div>
+
+            <div id="upiPayment" class="payment-method d-none">
+              <h3>Pay using UPI</h3>
+              <p class="payment-note">Scan this demonstration QR with your phone camera. It is not connected to a real payment account.</p>
+
+              <div class="qr-panel">
+                <img id="paymentQr" alt="Demo UPI QR code">
+                <span><i class="bi bi-qr-code"></i> Demo QR only</span>
+              </div>
+
+              <p class="qr-instructions">
+                1. Open your UPI app<br>
+                2. Scan the QR code<br>
+                3. For this college demo, select “Simulate payment complete” below
+              </p>
+
+              <button id="simulateUpiPayment" class="btn btn-primary w-100" type="button">
+                Simulate payment complete
+              </button>
+            </div>
+
+            <div id="paymentSuccess" class="payment-success d-none">
+              <i class="bi bi-check-circle-fill"></i>
+              <h3>Demo booking confirmed</h3>
+              <p>This is a simulated payment only. No money has been charged.</p>
+              <div id="confirmationReference"></div>
+              <button id="backToPayment" class="btn btn-outline-primary mt-3" type="button">Back to payment</button>
+            </div>
+          </div>
+
+          <aside class="payment-summary">
+            <span class="eyebrow dark">Booking summary</span>
+            <h3>Your trip</h3>
+            <div id="paymentBookingSummary">
+              <p class="summary-placeholder">Select a hotel and create your travel plan to see the booking summary here.</p>
+            </div>
+            <div class="payment-total">
+              <span>Total to pay</span>
+              <strong id="paymentTotal">₹0</strong>
+            </div>
+            <p class="payment-disclaimer">
+              <i class="bi bi-shield-check"></i>
+              Student project prototype. No real payment is processed.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Budget calculator -->
+    <section class="section budget-section" id="budget">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow dark">Estimate</span>
+            <h2>Plan your travel budget</h2>
+            <p>Select a location and get default estimates. You can adjust them before planning.</p>
+          </div>
+        </div>
+
+        <div class="budget-layout">
+          <div class="budget-card">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="budgetDestination">Destination</label>
+                <select id="budgetDestination" class="form-select">
+                  <option>Manali</option><option>Goa</option><option>Amritsar</option>
+                  <option>Jaipur</option><option>Kerala</option><option>Ladakh</option>
+                  <option>Chandigarh</option><option>Shimla</option><option>Delhi</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="budgetDays">Days</label>
+                <input id="budgetDays" class="form-control" type="number" min="1" value="5">
+              </div>
+              <div class="col-md-3">
+                <label for="budgetTravelers">Travelers</label>
+                <input id="budgetTravelers" class="form-control" type="number" min="1" value="2">
+              </div>
+            </div>
+
+            <div class="budget-inputs">
+              <div>
+                <label for="transportation">Transportation</label>
+                <div class="input-group"><span class="input-group-text">₹</span><input id="transportation" type="number"></div>
+              </div>
+              <div>
+                <label for="accommodation">Accommodation</label>
+                <div class="input-group"><span class="input-group-text">₹</span><input id="accommodation" type="number"></div>
+              </div>
+              <div>
+                <label for="food">Food</label>
+                <div class="input-group"><span class="input-group-text">₹</span><input id="food" type="number"></div>
+              </div>
+              <div>
+                <label for="activities">Activities</label>
+                <div class="input-group"><span class="input-group-text">₹</span><input id="activities" type="number"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="total-card">
+            <span>Estimated trip cost</span>
+            <h3 id="budgetTotal">₹0</h3>
+            <p id="budgetLabel">Manali · 5 days · 2 travelers</p>
+            <div class="cost"><span>Transport</span><strong id="transportationTotal">₹0</strong></div>
+            <div class="cost"><span>Stay</span><strong id="accommodationTotal">₹0</strong></div>
+            <div class="cost"><span>Food</span><strong id="foodTotal">₹0</strong></div>
+            <div class="cost"><span>Activities</span><strong id="activitiesTotal">₹0</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About the student project -->
+    <section class="section about-section">
+      <div class="container">
+        <div class="about">
+          <div>
+            <span class="eyebrow dark">About</span>
+            <h2>A colourful travel planner built step by step.</h2>
+            <p>Smart Travel Planner combines destination discovery, accommodation selection, travel planning and budgeting in one simple interface. The current version is a frontend project using HTML5, CSS3, Bootstrap, JavaScript and Local Storage.</p>
+          </div>
+          <div class="about-points">
+            <div><i class="bi bi-check-circle"></i> Destination discovery</div>
+            <div><i class="bi bi-check-circle"></i> Hotel selection interface</div>
+            <div><i class="bi bi-check-circle"></i> Travel plan builder</div>
+            <div><i class="bi bi-check-circle"></i> Location-based budget defaults</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <strong>SmartTravel</strong><span> · Plan less. Travel more.</span>
+      <small>© <span id="year"></span></small>
+    </div>
+  </footer>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toast" class="toast">
+      <div class="toast-body">
+        <i class="bi bi-check-circle-fill"></i>
+        <span id="toastMessage"></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
